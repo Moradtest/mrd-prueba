@@ -1,156 +1,173 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Morad | Web Personal</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Morad Hanoun | Sitio Web Personal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+    <!-- SEO básico -->
+    <meta name="description" content="Sitio web personal de Morad Hanoun. Aprendiendo desarrollo web y tecnología.">
+    <meta name="author" content="Morad Hanoun">
 
-    body {
-      background: #0f172a;
-      color: #e5e7eb;
-      line-height: 1.6;
-    }
+    <!-- Estilos -->
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
 
-    header {
-      background: #020617;
-      padding: 30px 20px;
-      text-align: center;
-    }
+        header {
+            background: #111;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
 
-    header h1 {
-      font-size: 3rem;
-      color: #38bdf8;
-    }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
 
-    header p {
-      margin-top: 10px;
-      font-size: 1.2rem;
-      color: #cbd5f5;
-    }
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
 
-    nav {
-      background: #020617;
-      padding: 10px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-    }
+        nav {
+            background: #222;
+            padding: 10px;
+            text-align: center;
+        }
 
-    nav a {
-      color: #e5e7eb;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-    nav a:hover {
-      color: #38bdf8;
-    }
+        nav a:hover {
+            text-decoration: underline;
+        }
 
-    section {
-      max-width: 1000px;
-      margin: auto;
-      padding: 80px 20px;
-    }
+        section {
+            max-width: 1000px;
+            margin: auto;
+            padding: 40px 20px;
+            background: #fff;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
 
-    section h2 {
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      color: #38bdf8;
-    }
+        h2 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
 
-    .card {
-      background: #020617;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
 
-    .skills span {
-      display: inline-block;
-      background: #1e293b;
-      padding: 10px 15px;
-      margin: 5px;
-      border-radius: 20px;
-    }
+        .card {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      background: #020617;
-      margin-top: 40px;
-      color: #94a3b8;
-    }
-  </style>
+        footer {
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #4da3ff;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
 
 <header>
-  <h1>Hola, soy Morad</h1>
-  <p>Estoy aprendiendo desarrollo web y construyendo mi camino</p>
+    <h1>Hola, soy Morad</h1>
+    <p>Estoy aprendiendo desarrollo web y construyendo mi camino</p>
 </header>
 
 <nav>
-  <a href="#sobre">Sobre mí</a>
-  <a href="#habilidades">Habilidades</a>
-  <a href="#proyectos">Proyectos</a>
-  <a href="#contacto">Contacto</a>
+    <a href="#sobre-mi">Sobre mí</a>
+    <a href="#habilidades">Habilidades</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#contacto">Contacto</a>
 </nav>
 
-<section id="sobre">
-  <h2>Sobre mí</h2>
-  <div class="card">
+<section id="sobre-mi">
+    <h2>Sobre mí</h2>
     <p>
-      Me llamo Morad y estoy dando mis primeros pasos en el desarrollo web.
-      Me interesa aprender haciendo, crear proyectos reales y mejorar cada día.
-      Este sitio es parte de ese proceso.
+        Me llamo Morad Hanoun. Estoy empezando en el mundo del desarrollo web
+        y la tecnología. Me gusta aprender paso a paso, entender cómo funcionan
+        las cosas y construir proyectos reales.
     </p>
-  </div>
+    <p>
+        Este sitio web es parte de mi aprendizaje. Todo está hecho con HTML y CSS
+        puro para entender bien las bases.
+    </p>
 </section>
 
 <section id="habilidades">
-  <h2>Habilidades</h2>
-  <div class="card skills">
-    <span>HTML</span>
-    <span>CSS</span>
-    <span>JavaScript</span>
-    <span>Git & GitHub</span>
-    <span>Aprendizaje constante</span>
-  </div>
+    <h2>Habilidades</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>HTML</h3>
+            <p>Estructura de páginas web, etiquetas semánticas y buenas prácticas.</p>
+        </div>
+
+        <div class="card">
+            <h3>CSS</h3>
+            <p>Diseño básico, colores, layouts y diseño responsive.</p>
+        </div>
+
+        <div class="card">
+            <h3>Git & GitHub</h3>
+            <p>Control de versiones, commits, repositorios y GitHub Pages.</p>
+        </div>
+
+        <div class="card">
+            <h3>Aprendizaje continuo</h3>
+            <p>Ganas de mejorar cada día y construir proyectos más grandes.</p>
+        </div>
+    </div>
 </section>
 
 <section id="proyectos">
-  <h2>Proyectos</h2>
-  <div class="card">
-    <p><strong>Web Personal</strong></p>
-    <p>Este sitio web creado desde cero y publicado en GitHub Pages.</p>
-  </div>
-
-  <div class="card">
-    <p><strong>Próximamente</strong></p>
-    <p>Más proyectos en camino mientras sigo aprendiendo.</p>
-  </div>
+    <h2>Proyectos</h2>
+    <ul>
+        <li>Sitio web personal con GitHub Pages</li>
+        <li>Pruebas con JavaScript y automatización</li>
+        <li>Proyectos personales de aprendizaje</li>
+    </ul>
 </section>
 
 <section id="contacto">
-  <h2>Contacto</h2>
-  <div class="card">
-    <p>Email: <strong>hannounim8pc@gmail.com</strong></p>
-    <p>GitHub: <strong>github.com/Moradtest</strong></p>
-  </div>
+    <h2>Contacto</h2>
+    <p>Puedes contactarme por:</p>
+    <ul>
+        <li>Email: <strong>hannounim8pc@gmail.com</strong></li>
+        <li>GitHub: <a href="https://github.com/Moradtest" target="_blank">github.com/Moradtest</a></li>
+    </ul>
 </section>
 
 <footer>
-  © 2026 Morad · Web personal
+    <p>© 2026 Morad Hanoun · Sitio web personal</p>
 </footer>
 
 </body>
