@@ -1,0 +1,5 @@
+[
+  { "key": "Accion completa", "text": "Hi,\nDone as requested.\nRegards," },
+  { "key": "DP match", "text": "Hi,\nThe product on hand matches the DP.\nAttached photos.\n\nRegards" },
+  { "key": "No inventory", "text": "Hi,\nWe do not have inventory of the item.\nRegards," }
+]
