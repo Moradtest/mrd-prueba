@@ -2,13 +2,156 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Tu Nombre</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>Morad | Web Personal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #0f172a;
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #020617;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: #38bdf8;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: #cbd5f5;
+    }
+
+    nav {
+      background: #020617;
+      padding: 10px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+    }
+
+    nav a {
+      color: #e5e7eb;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #38bdf8;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 80px 20px;
+    }
+
+    section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: #38bdf8;
+    }
+
+    .card {
+      background: #020617;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .skills span {
+      display: inline-block;
+      background: #1e293b;
+      padding: 10px 15px;
+      margin: 5px;
+      border-radius: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #020617;
+      margin-top: 40px;
+      color: #94a3b8;
+    }
+  </style>
 </head>
+
 <body>
 
+<header>
   <h1>Hola, soy Morad</h1>
-  <p>Estoy aprendiendo desarrollo web y construyendo mi camino.</p>
+  <p>Estoy aprendiendo desarrollo web y construyendo mi camino</p>
+</header>
+
+<nav>
+  <a href="#sobre">Sobre mí</a>
+  <a href="#habilidades">Habilidades</a>
+  <a href="#proyectos">Proyectos</a>
+  <a href="#contacto">Contacto</a>
+</nav>
+
+<section id="sobre">
+  <h2>Sobre mí</h2>
+  <div class="card">
+    <p>
+      Me llamo Morad y estoy dando mis primeros pasos en el desarrollo web.
+      Me interesa aprender haciendo, crear proyectos reales y mejorar cada día.
+      Este sitio es parte de ese proceso.
+    </p>
+  </div>
+</section>
+
+<section id="habilidades">
+  <h2>Habilidades</h2>
+  <div class="card skills">
+    <span>HTML</span>
+    <span>CSS</span>
+    <span>JavaScript</span>
+    <span>Git & GitHub</span>
+    <span>Aprendizaje constante</span>
+  </div>
+</section>
+
+<section id="proyectos">
+  <h2>Proyectos</h2>
+  <div class="card">
+    <p><strong>Web Personal</strong></p>
+    <p>Este sitio web creado desde cero y publicado en GitHub Pages.</p>
+  </div>
+
+  <div class="card">
+    <p><strong>Próximamente</strong></p>
+    <p>Más proyectos en camino mientras sigo aprendiendo.</p>
+  </div>
+</section>
+
+<section id="contacto">
+  <h2>Contacto</h2>
+  <div class="card">
+    <p>Email: <strong>hannounim8pc@gmail.com</strong></p>
+    <p>GitHub: <strong>github.com/Moradtest</strong></p>
+  </div>
+</section>
+
+<footer>
+  © 2026 Morad · Web personal
+</footer>
 
 </body>
 </html>
