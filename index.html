@@ -1,109 +1,100 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>TT Quick Replies - Página de Prueba</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        textarea {
-            width: 90%;
-            height: 200px;
-            margin-bottom: 20px;
-            font-size: 15px;
-            padding: 10px;
-        }
-        #repliesPanel {
-            width: 420px;
-            max-height: 70vh;
-            overflow-y: auto;
-            background: #f7f7f7;
-            border-radius: 10px;
-            padding: 10px;
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            display: none;
-            z-index: 10001;
-        }
-        #toggleButton {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #232f3e;
-            color: #fff;
-            font-size: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10000;
-        }
-        button.replyButton {
-            width: 100%;
-            margin-bottom: 6px;
-        }
-        input#search {
-            width: 100%;
-            margin-bottom: 8px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>TT Quick Replies - Página de prueba</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+    #textarea { width: 90%; height: 180px; margin: 20px 0; font-size: 15px; }
+    #toggleBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #232f3e;
+      color: #fff;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10000;
+    }
+    #panel {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 420px;
+      max-height: 70vh;
+      overflow-y: auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 10px;
+      display: none;
+      z-index: 10001;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    #search { width: 100%; margin-bottom: 8px; padding: 5px; }
+    .replyBtn { width: 100%; margin-bottom: 6px; padding: 5px; cursor: pointer; }
+  </style>
 </head>
 <body>
 
-<h2>TT Quick Replies - Página de Prueba</h2>
-<p>Área de prueba: aquí se insertarán las respuestas.</p>
-<textarea id="testArea" placeholder="🧪 Área de prueba – aquí se insertan las respuestas"></textarea>
+<h1>TT Quick Replies - Página de prueba</h1>
+<textarea id="textarea" placeholder="🧪 Área de prueba – aquí se insertan las respuestas"></textarea>
 
-<!-- Botón para abrir el panel -->
-<div id="toggleButton">📬</div>
+<div id="toggleBtn">📬</div>
 
-<!-- Panel de respuestas -->
-<div id="repliesPanel">
-    <input type="text" id="search" placeholder="Buscar respuesta...">
-    <div id="repliesContainer"></div>
+<div id="panel">
+  <input type="text" id="search" placeholder="Buscar respuesta...">
+  <div id="container"></div>
 </div>
 
-<!-- Cargar tu script -->
-<script src="tt_quick_replies_5_4.user.js"></script>
-
 <script>
-    // ================== Panel y área de prueba ==================
-    const textarea = document.getElementById('testArea');
-    const toggle = document.getElementById('toggleButton');
-    const panel = document.getElementById('repliesPanel');
-    const search = document.getElementById('search');
-    const container = document.getElementById('repliesContainer');
+document.addEventListener('DOMContentLoaded', function() {
+  const textarea = document.getElementById('textarea');
+  const toggleBtn = document.getElementById('toggleBtn');
+  const panel = document.getElementById('panel');
+  const searchInput = document.getElementById('search');
+  const container = document.getElementById('container');
 
-    // Si tu script define 'replies', lo usamos
-    function renderReplies(filter = '') {
-        container.innerHTML = '';
-        if (typeof replies === 'undefined') return; // evitar error si no está definido
-        replies
-            .filter(r => r.key.toLowerCase().includes(filter.toLowerCase()))
-            .forEach(r => {
-                const b = document.createElement('button');
-                b.textContent = r.key;
-                b.className = 'replyButton';
-                b.onclick = () => {
-                    textarea.value = r.text;
-                };
-                container.appendChild(b);
-            });
-    }
+  let replies = [];
 
-    renderReplies();
+  // Cargar JSON de respuestas
+  fetch('replies.json')
+    .then(res => res.json())
+    .then(data => {
+      replies = data;
+      renderReplies();
+    })
+    .catch(err => console.error('Error cargando replies.json:', err));
 
-    search.oninput = () => renderReplies(search.value);
+  function setValue(el, value) {
+    el.value = value;
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+  }
 
-    toggle.onclick = () => {
-        panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-    };
+  function renderReplies(filter = '') {
+    container.innerHTML = '';
+    replies
+      .filter(r => r.key.toLowerCase().includes(filter.toLowerCase()))
+      .forEach(r => {
+        const btn = document.createElement('button');
+        btn.textContent = r.key;
+        btn.className = 'replyBtn';
+        btn.onclick = () => setValue(textarea, r.text);
+        container.appendChild(btn);
+      });
+  }
+
+  searchInput.addEventListener('input', () => renderReplies(searchInput.value));
+
+  toggleBtn.onclick = () => {
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  };
+});
 </script>
 
 </body>
