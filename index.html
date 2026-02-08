@@ -1,100 +1,114 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>TT Quick Replies - Página de prueba</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
-    #textarea { width: 90%; height: 180px; margin: 20px 0; font-size: 15px; }
-    #toggleBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: #232f3e;
-      color: #fff;
-      font-size: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 10000;
-    }
-    #panel {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      width: 420px;
-      max-height: 70vh;
-      overflow-y: auto;
-      background: #fff;
-      border-radius: 10px;
-      padding: 10px;
-      display: none;
-      z-index: 10001;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-    #search { width: 100%; margin-bottom: 8px; padding: 5px; }
-    .replyBtn { width: 100%; margin-bottom: 6px; padding: 5px; cursor: pointer; }
-  </style>
+<meta charset="UTF-8">
+<title>TT Quick Replies</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    background: #232f3e;
+    color: #fff;
+    padding: 15px 20px;
+    font-size: 24px;
+    text-align: center;
+  }
+  #main {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+  }
+  #responses-panel {
+    width: 250px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  #responses-panel input {
+    width: 100%;
+    padding: 6px 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  #responses-panel button {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    border: none;
+    border-radius: 5px;
+    background: #232f3e;
+    color: #fff;
+    cursor: pointer;
+    text-align: left;
+  }
+  #responses-panel button:hover {
+    background: #3a4552;
+  }
+  #test-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  #test-area textarea {
+    flex: 1;
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    resize: none;
+  }
+</style>
 </head>
 <body>
 
-<h1>TT Quick Replies - Página de prueba</h1>
-<textarea id="textarea" placeholder="🧪 Área de prueba – aquí se insertan las respuestas"></textarea>
+<header>TT Quick Replies</header>
 
-<div id="toggleBtn">📬</div>
-
-<div id="panel">
-  <input type="text" id="search" placeholder="Buscar respuesta...">
-  <div id="container"></div>
+<div id="main">
+  <div id="responses-panel">
+    <input type="text" id="search" placeholder="Buscar respuesta...">
+    <div id="buttons-container"></div>
+  </div>
+  <div id="test-area">
+    <textarea id="textarea" placeholder="🧪 Aquí se insertan las respuestas"></textarea>
+  </div>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const textarea = document.getElementById('textarea');
-  const toggleBtn = document.getElementById('toggleBtn');
-  const panel = document.getElementById('panel');
-  const searchInput = document.getElementById('search');
-  const container = document.getElementById('container');
+// ================== Cargar respuestas desde JSON ==================
+fetch('replies.json')
+  .then(response => response.json())
+  .then(replies => {
+    const container = document.getElementById('buttons-container');
+    const searchInput = document.getElementById('search');
+    const textarea = document.getElementById('textarea');
 
-  let replies = [];
+    function render(filter = '') {
+      container.innerHTML = '';
+      replies
+        .filter(r => r.key.toLowerCase().includes(filter.toLowerCase()))
+        .forEach(r => {
+          const btn = document.createElement('button');
+          btn.textContent = r.key;
+          btn.onclick = () => {
+            textarea.value = r.text;
+          };
+          container.appendChild(btn);
+        });
+    }
 
-  // Cargar JSON de respuestas
-  fetch('replies.json')
-    .then(res => res.json())
-    .then(data => {
-      replies = data;
-      renderReplies();
-    })
-    .catch(err => console.error('Error cargando replies.json:', err));
-
-  function setValue(el, value) {
-    el.value = value;
-    el.dispatchEvent(new Event('input', { bubbles: true }));
-  }
-
-  function renderReplies(filter = '') {
-    container.innerHTML = '';
-    replies
-      .filter(r => r.key.toLowerCase().includes(filter.toLowerCase()))
-      .forEach(r => {
-        const btn = document.createElement('button');
-        btn.textContent = r.key;
-        btn.className = 'replyBtn';
-        btn.onclick = () => setValue(textarea, r.text);
-        container.appendChild(btn);
-      });
-  }
-
-  searchInput.addEventListener('input', () => renderReplies(searchInput.value));
-
-  toggleBtn.onclick = () => {
-    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-  };
-});
+    render();
+    searchInput.addEventListener('input', () => render(searchInput.value));
+  })
+  .catch(err => console.error('Error cargando replies.json:', err));
 </script>
 
 </body>
