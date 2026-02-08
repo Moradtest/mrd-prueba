@@ -1,115 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>TT Quick Replies</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f0f2f5;
-    margin: 0;
-    padding: 0;
-  }
-  header {
-    background: #232f3e;
-    color: #fff;
-    padding: 15px 20px;
-    font-size: 24px;
-    text-align: center;
-  }
-  #main {
-    display: flex;
-    padding: 20px;
-    gap: 20px;
-  }
-  #responses-panel {
-    width: 250px;
-    background: #fff;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    max-height: 70vh;
-    overflow-y: auto;
-  }
-  #responses-panel input {
-    width: 100%;
-    padding: 6px 8px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  #responses-panel button {
-    width: 100%;
-    padding: 8px 10px;
-    margin-bottom: 6px;
-    border: none;
-    border-radius: 5px;
-    background: #232f3e;
-    color: #fff;
-    cursor: pointer;
-    text-align: left;
-  }
-  #responses-panel button:hover {
-    background: #3a4552;
-  }
-  #test-area {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  #test-area textarea {
-    flex: 1;
-    width: 100%;
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 15px;
-    resize: none;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>Tu Nombre</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<header>TT Quick Replies</header>
-
-<div id="main">
-  <div id="responses-panel">
-    <input type="text" id="search" placeholder="Buscar respuesta...">
-    <div id="buttons-container"></div>
-  </div>
-  <div id="test-area">
-    <textarea id="textarea" placeholder="🧪 Aquí se insertan las respuestas"></textarea>
-  </div>
-</div>
-
-<script>
-// ================== Cargar respuestas desde JSON ==================
-fetch('replies.json')
-  .then(response => response.json())
-  .then(replies => {
-    const container = document.getElementById('buttons-container');
-    const searchInput = document.getElementById('search');
-    const textarea = document.getElementById('textarea');
-
-    function render(filter = '') {
-      container.innerHTML = '';
-      replies
-        .filter(r => r.key.toLowerCase().includes(filter.toLowerCase()))
-        .forEach(r => {
-          const btn = document.createElement('button');
-          btn.textContent = r.key;
-          btn.onclick = () => {
-            textarea.value = r.text;
-          };
-          container.appendChild(btn);
-        });
-    }
-
-    render();
-    searchInput.addEventListener('input', () => render(searchInput.value));
-  })
-  .catch(err => console.error('Error cargando replies.json:', err));
-</script>
+  <h1>Hola, soy Morad</h1>
+  <p>Estoy aprendiendo desarrollo web y construyendo mi camino.</p>
 
 </body>
 </html>
