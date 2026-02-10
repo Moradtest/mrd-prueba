@@ -2,6 +2,116 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Morad Hanoun | Sitio Web test </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morad | Lab</title>
+    <style>
+        /* Estilos Base */
+        body, html { margin: 0; padding: 0; background: #020617; color: #f8fafc; font-family: 'Inter', system-ui, sans-serif; overflow: hidden; height: 100%; }
+        
+        /* Lienzo de Fondo */
+        #bg-canvas { position: fixed; top: 0; left: 0; z-index: 0; }
 
+        /* Contenido Principal */
+        main {
+            position: relative; z-index: 10;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 100vh; text-align: center; pointer-events: none;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem; border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            pointer-events: auto;
+            max-width: 400px;
+        }
+
+        h1 { font-size: 2.5rem; margin: 0; background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        p { color: #94a3b8; margin: 1rem 0; line-height: 1.6; }
+
+        /* Botón Interactivo */
+        .btn {
+            display: inline-block; padding: 0.75rem 1.5rem;
+            background: #38bdf8; color: #020617; text-decoration: none;
+            font-weight: bold; border-radius: 12px; transition: 0.3s;
+            border: none; cursor: pointer;
+        }
+        .btn:hover { transform: scale(1.05); background: #f0f9ff; box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <main>
+        <div class="card">
+            <h1>Morad Lab</h1>
+            <p>Este es mi espacio de pruebas en GitHub Pages. Aquí experimento con JavaScript, CSS y nuevas tecnologías.</p>
+            <button class="btn" onclick="triggerExplosion()">¡Sorpresa!</button>
+        </div>
+    </main>
+
+    <script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor(x, y, speedX, speedY) {
+                this.x = x || Math.random() * canvas.width;
+                this.y = y || Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = speedX || (Math.random() - 0.5) * 1.5;
+                this.speedY = speedY || (Math.random() - 0.5) * 1.5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(56, 189, 248, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function createParticles() {
+            for (let i = 0; i < 80; i++) particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        function triggerExplosion() {
+            // Crea 50 partículas desde el centro al hacer clic
+            for (let i = 0; i < 50; i++) {
+                const vx = (Math.random() - 0.5) * 10;
+                const vy = (Math.random() - 0.5) * 10;
+                particles.push(new Particle(window.innerWidth/2, window.innerHeight/2, vx, vy));
+            }
+            if (particles.length > 300) particles.splice(0, 50); // Mantener rendimiento
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        createParticles();
+        animate();
+    </script>
+</body>
+</html>
