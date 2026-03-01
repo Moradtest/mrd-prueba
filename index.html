@@ -1,36 +1,207 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Murad Hanoun</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>Murad Hanoun</h1>
-        <p>Aprendiendo y creando cosas cada día</p>
-    </header>
+/* Variables y reset */
+:root {
+    --bg: #0a0c0f;
+    --surface: #121518;
+    --primary: #00ff9d;
+    --primary-dim: #00cc7a;
+    --text: #e0e4e9;
+    --text-muted: #9aa3b4;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
 
-    <section id="sobre-mi">
-        <h2>Sobre mí</h2>
-        <p>Soy alguien que disfruta aprender, experimentar y mejorar cada día.</p>
-    </section>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <section id="proyectos">
-        <h2>Proyectos</h2>
-        <ul>
-            <li>Proyecto 1: Mini web interactiva</li>
-            <li>Proyecto 2: Panel de alertas con JavaScript</li>
-        </ul>
-    </section>
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
 
-    <section id="contacto">
-        <h2>Contacto</h2>
-        <p>Email: murad@example.com</p>
-    </section>
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
 
-    <footer>
-        <p>© 2026 Murad Hanoun</p>
-    </footer>
-</body>
-</html>
+/* Secciones */
+.section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 0;
+    border-bottom: 1px solid rgba(0, 255, 157, 0.1);
+}
+
+.section:last-of-type {
+    border-bottom: none;
+}
+
+.content {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+/* Hero */
+.hero {
+    min-height: 70vh;
+    text-align: center;
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--primary) 0%, #7effb7 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.tagline {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Títulos de sección */
+h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--primary);
+    border-left: 4px solid var(--primary);
+    padding-left: 1.2rem;
+}
+
+/* Párrafos */
+p {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+/* Proyectos */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.project-card {
+    background: var(--surface);
+    padding: 1.8rem 1.5rem;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 255, 157, 0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px -8px rgba(0, 255, 157, 0.2);
+    border-color: var(--primary-dim);
+}
+
+.project-card h3 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+}
+
+.project-card p {
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+/* Contacto */
+.email {
+    font-size: 1.4rem;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.email a {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.email a:hover {
+    border-bottom-color: var(--primary);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin: 2.5rem 0;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.social-links a:hover {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem 0 0.5rem;
+    color: var(--text-muted);
+    border-top: 1px solid rgba(0, 255, 157, 0.1);
+    font-size: 0.9rem;
+}
+
+/* Animaciones suaves al cargar */
+.animate {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.animate.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2.8rem;
+    }
+    .tagline {
+        font-size: 1.2rem;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    .social-links {
+        gap: 1.5rem;
+    }
+}
