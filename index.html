@@ -1,407 +1,706 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎉 Moradtest | El Frontend más loco del código</title>
-  
-  <!-- Google Fonts divertidas -->
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Fredoka+One&display=swap" rel="stylesheet">
-  
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portafolio profesional de Moradtest - Desarrollador Frontend">
+    <meta name="author" content="Moradtest">
+    <title>Moradtest | Portafolio Profesional</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Fredoka One', cursive;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-      color: white;
-      overflow-x: hidden;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F8FAFC;
+            color: #1E293B;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
 
-    /* Fondo de estrellas animadas */
-    .stars {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      background: radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
-                  radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0));
-      background-size: 200px 200px;
-      background-repeat: repeat;
-      opacity: 0.3;
-      animation: twinkle 3s infinite;
-    }
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
 
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.6; }
-    }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-      position: relative;
-      z-index: 1;
-    }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2563EB, #7C3AED);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
 
-    /* Header con animación */
-    .header {
-      text-align: center;
-      padding: 60px 20px;
-      animation: slideDown 0.8s ease-out;
-    }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
 
-    @keyframes slideDown {
-      from {
-        transform: translateY(-100px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
 
-    h1 {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 3rem;
-      background: linear-gradient(45deg, #FFD700, #FF69B4, #00FFFF);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: rainbow 3s infinite;
-      margin-bottom: 20px;
-    }
+        .nav-links a:hover {
+            color: #2563EB;
+        }
 
-    @keyframes rainbow {
-      0%, 100% { filter: hue-rotate(0deg); }
-      50% { filter: hue-rotate(360deg); }
-    }
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-    .emoji-bounce {
-      font-size: 4rem;
-      display: inline-block;
-      animation: bounce 1s infinite;
-      cursor: pointer;
-    }
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
 
-    /* Tarjetas de proyectos */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      margin: 50px 0;
-    }
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #1E293B, #2563EB);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
 
-    .project-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 25px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
+        .hero-text .highlight {
+            color: #2563EB;
+        }
 
-    .project-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      background: rgba(255, 255, 255, 0.2);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #64748B;
+            margin-bottom: 2rem;
+        }
 
-    .project-icon {
-      font-size: 3rem;
-      margin-bottom: 15px;
-    }
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+        }
 
-    .project-title {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-      color: #FFD700;
-    }
+        .btn-primary {
+            background: #2563EB;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
 
-    .tech-badge {
-      display: inline-block;
-      background: rgba(0,0,0,0.3);
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      margin: 5px;
-    }
+        .btn-primary:hover {
+            background: #1D4ED8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37,99,235,0.2);
+        }
 
-    /* Stats section */
-    .stats {
-      background: rgba(0,0,0,0.3);
-      border-radius: 20px;
-      padding: 30px;
-      margin: 30px 0;
-      text-align: center;
-    }
+        .btn-secondary {
+            background: transparent;
+            color: #2563EB;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #2563EB;
+            transition: all 0.3s;
+        }
 
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
+        .btn-secondary:hover {
+            background: #2563EB;
+            color: white;
+        }
 
-    .stat-card {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 20px;
-      border-radius: 15px;
-      font-size: 1.5rem;
-    }
+        .hero-image {
+            background: linear-gradient(135deg, #2563EB, #7C3AED);
+            border-radius: 30px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
 
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #FFD700;
-    }
+        .hero-image i {
+            font-size: 8rem;
+            margin-bottom: 1rem;
+        }
 
-    /* Tech stack stickers */
-    .tech-stack {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin: 30px 0;
-    }
+        /* Section Styles */
+        .section {
+            padding: 5rem 0;
+            border-bottom: 1px solid #E2E8F0;
+        }
 
-    .tech-item {
-      background: white;
-      color: #333;
-      padding: 10px 20px;
-      border-radius: 50px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.1rem;
-      transition: all 0.3s;
-      animation: float 3s infinite;
-    }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
 
-    .tech-item:hover {
-      transform: scale(1.1);
-      background: #FFD700;
-    }
+        .section-title span {
+            color: #2563EB;
+        }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-5px); }
-    }
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
 
-    /* Botón modo caos */
-    .chaos-button {
-      background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
-      border: none;
-      color: white;
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      border-radius: 50px;
-      cursor: pointer;
-      font-family: 'Fredoka One', cursive;
-      transition: all 0.3s;
-      margin: 20px auto;
-      display: block;
-    }
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border: 1px solid #E2E8F0;
+        }
 
-    .chaos-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255,255,255,0.5);
-    }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
 
-    footer {
-      text-align: center;
-      padding: 40px;
-      margin-top: 50px;
-      border-top: 1px solid rgba(255,255,255,0.2);
-    }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #2563EB;
+        }
 
-    @media (max-width: 768px) {
-      h1 { font-size: 1.8rem; }
-      .emoji-bounce { font-size: 2.5rem; }
-    }
-  </style>
+        .stat-label {
+            color: #64748B;
+            margin-top: 0.5rem;
+        }
+
+        /* Tech Stack */
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .tech-item {
+            background: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            border: 1px solid #E2E8F0;
+            transition: all 0.3s;
+        }
+
+        .tech-item:hover {
+            background: #2563EB;
+            color: white;
+            border-color: #2563EB;
+            transform: translateY(-2px);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            border: 1px solid #E2E8F0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            color: #64748B;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech span {
+            background: #F1F5F9;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .project-link {
+            color: #2563EB;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Timeline for memories */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #2563EB;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: #2563EB;
+            border: 2px solid white;
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: #2563EB;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid #E2E8F0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .contact-item i {
+            width: 40px;
+            height: 40px;
+            background: #EFF6FF;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563EB;
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: #F1F5F9;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #475569;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: #2563EB;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1E293B;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .btn-group {
+                justify-content: center;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="stars"></div>
-  
-  <div class="container">
-    <!-- Header loco -->
-    <div class="header">
-      <div class="emoji-bounce" onclick="location.reload()">🎉</div>
-      <h1>✨ MORADTEST ✨</h1>
-      <p style="font-size: 1.2rem;">🚀 Donde el código se vuelve FIESTA 🎈</p>
-      <p>💻 Frontend Developer | 🎨 CSS Artist | ☕ Café lover</p>
-    </div>
-
-    <!-- Mensaje del día -->
-    <div class="stats" id="dailyQuote">
-      <h3>📢 Daily Quote de hoy</h3>
-      <p style="font-size: 1.3rem; margin-top: 10px;" id="quoteText">
-        "Cargando chistes de programadores..."
-      </p>
-    </div>
-
-    <!-- Tech Stack -->
-    <h2 style="text-align: center; margin: 30px 0;">🧩 Mi colección de stickers tecnológicos</h2>
-    <div class="tech-stack">
-      <div class="tech-item">📄 HTML5</div>
-      <div class="tech-item">🎨 CSS3</div>
-      <div class="tech-item">⚡ JavaScript</div>
-      <div class="tech-item">⚛️ React</div>
-      <div class="tech-item">💚 Vue.js</div>
-      <div class="tech-item">🎨 Tailwind</div>
-      <div class="tech-item">🛠️ Git</div>
-      <div class="tech-item">🎭 Figma</div>
-    </div>
-
-    <!-- Proyectos destacados -->
-    <h2 style="text-align: center;">🚀 Mis Proyectos Locos</h2>
-    <div class="projects-grid">
-      <div class="project-card" onclick="window.open('https://github.com/Moradtest/pixel-party', '_blank')">
-        <div class="project-icon">🎨</div>
-        <div class="project-title">Pixel Party</div>
-        <p>Generador de fondos ochenteros con CSS puro</p>
-        <span class="tech-badge">React</span>
-        <span class="tech-badge">CSS Grid</span>
-      </div>
-
-      <div class="project-card" onclick="window.open('https://github.com/Moradtest/css-rainbows', '_blank')">
-        <div class="project-icon">🌈</div>
-        <div class="project-title">CSS Rainbows</div>
-        <p>Biblioteca de degradados psicodélicos</p>
-        <span class="tech-badge">CSS</span>
-        <span class="tech-badge">JS</span>
-      </div>
-
-      <div class="project-card" onclick="window.open('https://github.com/Moradtest/console-jokes', '_blank')">
-        <div class="project-icon">😂</div>
-        <div class="project-title">Console Jokes</div>
-        <p>Chistes de programadores en la terminal</p>
-        <span class="tech-badge">Node.js</span>
-      </div>
-
-      <div class="project-card" onclick="window.open('https://github.com/Moradtest/flexbox-zoo', '_blank')">
-        <div class="project-icon">🦁</div>
-        <div class="project-title">Flexbox Zoo</div>
-        <p>Aprende Flexbox con animales</p>
-        <span class="tech-badge">CSS Flexbox</span>
-      </div>
-    </div>
-
-    <!-- Estadísticas divertidas -->
-    <div class="stats">
-      <h3>📊 Mis stats de locura</h3>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div>☕ Café bebido</div>
-          <div class="stat-number" id="coffeeCount">∞</div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Moradtest</div>
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#about">Sobre Mí</a></li>
+                <li><a href="#projects">Proyectos</a></li>
+                <li><a href="#memories">Memorias</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
         </div>
-        <div class="stat-card">
-          <div>🐛 Bugs creados</div>
-          <div class="stat-number">999+</div>
-        </div>
-        <div class="stat-card">
-          <div>✨ Features falsas</div>
-          <div class="stat-number">42</div>
-        </div>
-        <div class="stat-card">
-          <div>🎉 Commits festivos</div>
-          <div class="stat-number">1337</div>
-        </div>
-      </div>
-    </div>
+    </nav>
 
-    <!-- Botón del caos -->
-    <button class="chaos-button" onclick="activateChaos()">
-      🌪️ ACTIVAR MODO CAOS 🌪️
-    </button>
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Desarrollador <span class="highlight">Frontend</span><br>Creativo & Profesional</h1>
+                        <p>Especializado en crear experiencias web excepcionales con código limpio y diseño moderno. 10+ años transformando ideas en realidad digital.</p>
+                        <div class="btn-group">
+                            <a href="#projects" class="btn-primary">Ver Proyectos</a>
+                            <a href="#contact" class="btn-secondary">Contactar</a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <i class="fas fa-code"></i>
+                        <h3>Moradtest</h3>
+                        <p>Frontend Developer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- GitHub Stats embed -->
-    <div class="stats">
-      <h3>📈 GitHub Stats en tiempo real</h3>
-      <img src="https://github-readme-stats.vercel.app/api?username=Moradtest&show_icons=true&theme=radical&bg_color=00000000&title_color=FFD700&icon_color=FF69B4" width="100%" style="max-width: 500px; margin: 20px auto; display: block;">
-      <img src="https://github-readme-streak-stats.herokuapp.com/?user=Moradtest&theme=radical&background=00000000" width="100%" style="max-width: 500px; margin: 20px auto; display: block;">
-    </div>
+        <!-- Stats Section -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Métricas <span>Profesionales</span></h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Años de Experiencia</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Proyectos Completados</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">30+</div>
+                        <div class="stat-label">Clientes Satisfechos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Dedicación</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <footer>
-      <p>🎈 Hecho con 💖, ☕ y muchos bugs 🐛</p>
-      <p>⭐ ¿Te gusta el caos? ¡Dale estrella a mis repos! ⭐</p>
-      <div class="emoji-bounce" style="font-size: 2rem;">🎊🎉🎈</div>
+        <!-- Tech Stack -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Tecnologías <span>Dominadas</span></h2>
+                <div class="tech-grid">
+                    <span class="tech-item">HTML5</span>
+                    <span class="tech-item">CSS3</span>
+                    <span class="tech-item">JavaScript</span>
+                    <span class="tech-item">TypeScript</span>
+                    <span class="tech-item">React</span>
+                    <span class="tech-item">Vue.js</span>
+                    <span class="tech-item">Angular</span>
+                    <span class="tech-item">Node.js</span>
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">Git</span>
+                    <span class="tech-item">Figma</span>
+                    <span class="tech-item">Tailwind</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title">Proyectos <span>Destacados</span></h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">E-commerce Platform</h3>
+                            <p class="project-desc">Plataforma de comercio electrónico completa con panel de administración y pasarela de pagos.</p>
+                            <div class="project-tech">
+                                <span>React</span>
+                                <span>Node.js</span>
+                                <span>MongoDB</span>
+                            </div>
+                            <a href="#" class="project-link">Ver más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Dashboard Analytics</h3>
+                            <p class="project-desc">Dashboard interactivo para visualización de datos en tiempo real con gráficos avanzados.</p>
+                            <div class="project-tech">
+                                <span>Vue.js</span>
+                                <span>D3.js</span>
+                                <span>Firebase</span>
+                            </div>
+                            <a href="#" class="project-link">Ver más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">App Móvil Fitness</h3>
+                            <p class="project-desc">Aplicación móvil multiplataforma para seguimiento de entrenamientos y nutrición.</p>
+                            <div class="project-tech">
+                                <span>React Native</span>
+                                <span>Redux</span>
+                                <span>API REST</span>
+                            </div>
+                            <a href="#" class="project-link">Ver más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Memories / Timeline Section -->
+        <section id="memories" class="section">
+            <div class="container">
+                <h2 class="section-title">Línea de <span>Tiempo</span></h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024 - Presente</div>
+                        <div class="timeline-title">Lead Frontend Developer | Tech Corp</div>
+                        <p>Liderando equipo de 5 desarrolladores, implementando arquitectura moderna y mejores prácticas.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2021 - 2024</div>
+                        <div class="timeline-title">Senior Frontend Developer | Digital Agency</div>
+                        <p>Desarrollo de aplicaciones web complejas para clientes internacionales.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2018 - 2021</div>
+                        <div class="timeline-title">Frontend Developer | Startup Innovate</div>
+                        <p>Creación desde cero de productos digitales escalables.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2014 - 2018</div>
+                        <div class="timeline-title">Grado en Ingeniería Informática</div>
+                        <p>Universidad Tecnológica - Especialización en Desarrollo Web.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">Información de <span>Contacto</span></h2>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email</strong><br>
+                                moradtest@example.com
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Teléfono</strong><br>
+                                +34 123 456 789
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Ubicación</strong><br>
+                                Madrid, España
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div style="background: white; padding: 2rem; border-radius: 16px; border: 1px solid #E2E8F0;">
+                        <h3 style="margin-bottom: 1rem;">¿Hablamos?</h3>
+                        <p style="color: #64748B; margin-bottom: 1.5rem;">Estoy disponible para colaboraciones, proyectos freelance o simplemente para conectar.</p>
+                        <div style="background: #F1F5F9; padding: 1.5rem; border-radius: 12px;">
+                            <i class="fas fa-clock" style="color: #2563EB; margin-right: 0.5rem;"></i>
+                            <strong>Horario de respuesta:</strong>
+                            <p style="margin-top: 0.5rem;">Lunes a Viernes: 9:00 - 18:00<br>Tiempo de respuesta: 24h</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Moradtest. Todos los derechos reservados.</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">Construyendo experiencias digitales excepcionales</p>
+        </div>
     </footer>
-  </div>
 
-  <script>
-    // Frases divertidas para la daily quote
-    const quotes = [
-      "No es un bug, es una feature no documentada 🕵️‍♂️",
-      "Funciona en mi máquina... ¡y eso es lo que importa! 💻",
-      "CSS: Si no funciona, añade !important hasta que sí funcione 🎨",
-      "JavaScript: Porque 'undefined' no es lo mismo que 'null'... o sí? 🤔",
-      "El café + código = Felicidad ☕✨",
-      "Mi código está 80% comentarios y 20% pánico 😱",
-      "Si lo ves feo, ponle un degradado y ya está 🌈"
-    ];
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
 
-    function updateDailyQuote() {
-      const randomIndex = Math.floor(Math.random() * quotes.length);
-      document.getElementById('quoteText').textContent = quotes[randomIndex];
-    }
-
-    updateDailyQuote();
-    setInterval(updateDailyQuote, 5000);
-
-    // Modo caos: colores aleatorios
-    function activateChaos() {
-      const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#FFD700', '#FF69B4'];
-      let clicks = 0;
-      
-      const chaosInterval = setInterval(() => {
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        document.body.style.background = `radial-gradient(circle at ${Math.random() * 100}% ${Math.random() * 100}%, ${randomColor}, #667eea)`;
-        clicks++;
-        
-        if (clicks > 20) {
-          clearInterval(chaosInterval);
-          setTimeout(() => {
-            document.body.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
-          }, 3000);
-        }
-      }, 200);
-      
-      // Animación de confeti simple
-      for(let i = 0; i < 50; i++) {
-        const confetti = document.createElement('div');
-        confetti.style.position = 'fixed';
-        confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.top = '-10px';
-        confetti.style.width = '10px';
-        confetti.style.height = '10px';
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.pointerEvents = 'none';
-        confetti.style.zIndex = '9999';
-        confetti.style.animation = `bounce 1s ${Math.random() * 2}s forwards`;
-        document.body.appendChild(confetti);
-        
-        setTimeout(() => confetti.remove(), 3000);
-      }
-      
-      alert('🌪️ ¡MODO CAOS ACTIVADO! 🌈 Los colores están bailando 🎉');
-    }
-  </script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if(window.scrollY > 50) {
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+            }
+        });
+    </script>
 </body>
 </html>
