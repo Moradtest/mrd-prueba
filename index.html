@@ -1,674 +1,286 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portafolio profesional de Moradtest - Desarrollador Frontend y Galería Visual">
-    <meta name="author" content="Moradtest">
-    <title>Moradtest | Portafolio & Memorias</title>
+    <title>Murad | My Journey, My Story</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        appleDark: '#000000',
+                        appleGray: '#1d1d1f',
+                        appleText: '#f5f5f7',
+                        appleMuted: '#86868b',
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* Variables CSS para control fácil de la paleta */
-        :root {
-            --primary: #2563EB;
-            --primary-dark: #1D4ED8;
-            --secondary: #7C3AED;
-            --text-main: #1E293B;
-            --text-muted: #64748B;
-            --bg-body: #F8FAFC;
-            --bg-surface: #FFFFFF;
-            --border-color: #E2E8F0;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-body);
-            color: var(--text-main);
-            line-height: 1.6;
-            scroll-behavior: smooth;
+            background-color: #000000;
+            color: #f5f5f7;
             overflow-x: hidden;
         }
 
-        /* Utilidad de Animación Scroll */
+        /* Apple-like blur para el menú */
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Animaciones de Scroll Reveal */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: var(--transition);
-            transition-duration: 0.8s;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Navbar Mejorado */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid transparent;
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: var(--transition);
-        }
-
-        .navbar.scrolled {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 500;
-            transition: var(--transition);
-            font-size: 0.95rem;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        /* Botón Menú Móvil */
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            color: var(--text-main);
-            cursor: pointer;
-        }
-
-        /* Container global */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 80px;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .hero-text h1 {
-            font-size: 3.8rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            color: var(--text-main);
-            letter-spacing: -1px;
-        }
-
-        .hero-text .highlight {
-            color: var(--primary);
-        }
-
-        .hero-text p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            max-width: 90%;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn-primary, .btn-secondary {
-            padding: 0.8rem 2rem;
+        /* Efectos de Galería Premium */
+        .gallery-item {
+            overflow: hidden;
             border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            border: 2px solid var(--primary);
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            border-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-main);
-            border: 2px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: var(--bg-surface);
-        }
-
-        .hero-image {
-            position: relative;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-            aspect-ratio: 4/5;
-        }
-
-        /* Sections Comunes */
-        .section {
-            padding: 6rem 0;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 3rem;
-            text-align: center;
-            letter-spacing: -0.5px;
-        }
-
-        .section-title span {
-            color: var(--primary);
-        }
-
-        /* Projects Grid (Con Imágenes Reales) */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: var(--bg-surface);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        }
-
-        .project-image {
-            height: 220px;
-            overflow: hidden;
             position: relative;
         }
-
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+        .gallery-item img {
+            transition: transform 0.7s ease, filter 0.7s ease;
+            filter: grayscale(100%) brightness(0.8);
         }
-
-        .project-card:hover .project-image img {
+        .gallery-item:hover img {
             transform: scale(1.05);
+            filter: grayscale(0%) brightness(1);
         }
-
-        .project-info {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-desc {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            flex-grow: 1;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .project-tech span {
-            background: var(--bg-body);
-            color: var(--text-muted);
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border: 1px solid var(--border-color);
-        }
-
-        .project-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        /* Galería de Memorias (NUEVO) */
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-auto-rows: 250px;
-            gap: 1.5rem;
-        }
-
-        .photo-item {
-            border-radius: 16px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .photo-item:hover img {
-            transform: scale(1.08);
-        }
-
-        .photo-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            padding: 2rem 1.5rem 1.5rem;
+        
+        /* Inputs del formulario minimalista */
+        .apple-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #424245;
             color: white;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            padding: 10px 0;
+            width: 100%;
+            transition: border-color 0.3s;
         }
-
-        .photo-item:hover .photo-overlay {
-            opacity: 1;
+        .apple-input:focus {
+            outline: none;
+            border-bottom: 1px solid #f5f5f7;
         }
-
-        .photo-overlay h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.2rem;
+        
+        /* Ocultar scrollbar pero permitir scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        .photo-overlay p {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.8);
+        ::-webkit-scrollbar-track {
+            background: #000;
         }
-
-        /* Tamaños de cuadrícula de fotos */
-        .item-large { grid-column: span 8; }
-        .item-small { grid-column: span 4; }
-        .item-tall { grid-column: span 4; grid-row: span 2; }
-
-        /* Timeline (Rediseñado) */
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--border-color);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-bottom: 3rem;
-            padding-left: 2rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -5px;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--primary);
-            box-shadow: 0 0 0 4px var(--bg-body);
-        }
-
-        .timeline-date {
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--bg-surface);
-            border-top: 1px solid var(--border-color);
-            padding: 3rem 0;
-            text-align: center;
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .hero-text p {
-                max-width: 100%;
-                margin: 0 auto 2.5rem;
-            }
-            .btn-group {
-                justify-content: center;
-            }
-            .photo-grid {
-                grid-template-columns: 1fr;
-            }
-            .item-large, .item-small, .item-tall {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: var(--bg-surface);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 2rem;
-                transition: 0.4s ease;
-                border-top: 1px solid var(--border-color);
-            }
-            .nav-links.active {
-                left: 0;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .hero-text h1 {
-                font-size: 2.8rem;
-            }
-            .section {
-                padding: 4rem 0;
-            }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
         }
     </style>
 </head>
-<body>
+<body class="antialiased selection:bg-white selection:text-black">
 
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo" style="text-decoration: none;">Morad.</a>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#home">Inicio</a></li>
-                <li><a href="#projects">Trabajo</a></li>
-                <li><a href="#experience">Experiencia</a></li>
-                <li><a href="#memories">Memorias</a></li>
-            </ul>
-            <div class="menu-toggle" id="mobile-menu">
-                <i class="fas fa-bars"></i>
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-medium tracking-widest uppercase">Murad.</a>
+            <div class="hidden md:flex space-x-8 text-sm text-appleMuted font-medium tracking-wide">
+                <a href="#about" class="hover:text-white transition-colors">Sobre Mí</a>
+                <a href="#memories" class="hover:text-white transition-colors">Memorias</a>
+                <a href="#gallery" class="hover:text-white transition-colors">Galería</a>
+                <a href="#experience" class="hover:text-white transition-colors">Experiencia</a>
+                <a href="#contact" class="hover:text-white transition-colors">Contacto</a>
             </div>
+            <button class="md:hidden text-white"><i class="fas fa-bars text-xl"></i></button>
         </div>
     </nav>
 
-    <main>
-        <section id="home" class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-text reveal">
-                        <h1>Arquitecto Digital & <span class="highlight">Viajero</span></h1>
-                        <p>Desarrollador Frontend especializado en crear interfaces premium. Combino mi pasión por el código limpio con las perspectivas visuales que adquiero explorando el mundo.</p>
-                        <div class="btn-group">
-                            <a href="#projects" class="btn-primary">Ver Trabajo <i class="fas fa-arrow-right"></i></a>
-                            <a href="#contact" class="btn-secondary">Contactar</a>
-                        </div>
-                    </div>
-                    <div class="hero-image reveal">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Morad Profil">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="section">
-            <div class="container">
-                <h2 class="section-title reveal">Proyectos <span>Destacados</span></h2>
-                <div class="projects-grid reveal">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="E-commerce">
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">E-commerce Premium</h3>
-                            <p class="project-desc">Plataforma de comercio electrónico de alto rendimiento con diseño minimalista y pasarela de pagos integrada.</p>
-                            <div class="project-tech">
-                                <span>React</span>
-                                <span>Tailwind CSS</span>
-                                <span>Node.js</span>
-                            </div>
-                            <a href="#" class="project-link">Ver caso de estudio <i class="fas fa-external-link-alt"></i></a>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dashboard">
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Analytics Dashboard</h3>
-                            <p class="project-desc">Panel de administración interactivo para visualización de datos en tiempo real de empresas financieras.</p>
-                            <div class="project-tech">
-                                <span>Vue.js</span>
-                                <span>D3.js</span>
-                                <span>Firebase</span>
-                            </div>
-                            <a href="#" class="project-link">Ver caso de estudio <i class="fas fa-external-link-alt"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="memories" class="section" style="background: var(--bg-surface);">
-            <div class="container">
-                <h2 class="section-title reveal">Memorias <span>Visuales</span></h2>
-                <p class="reveal" style="text-align: center; color: var(--text-muted); margin-top: -2rem; margin-bottom: 3rem;">Lugares, arquitectura y momentos que inspiran mi diseño.</p>
-                
-                <div class="photo-grid reveal">
-                    <div class="photo-item item-large">
-                        <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1000&q=80" alt="Milán">
-                        <div class="photo-overlay">
-                            <h4>Duomo di Milano</h4>
-                            <p>Italia - Estudio arquitectónico visual</p>
-                        </div>
-                    </div>
-                    
-                    <div class="photo-item item-tall">
-                        <img src="https://images.unsplash.com/photo-1516483638261-f40af5a5a456?auto=format&fit=crop&w=600&q=80" alt="Europa">
-                        <div class="photo-overlay">
-                            <h4>Cinque Terre</h4>
-                            <p>Italia - Paletas de color naturales</p>
-                        </div>
-                    </div>
-                    
-                    <div class="photo-item item-small">
-                        <img src="https://images.unsplash.com/photo-1467226632440-65f0b4957bd6?auto=format&fit=crop&w=600&q=80" alt="Montañas">
-                        <div class="photo-overlay">
-                            <h4>Los Balcanes</h4>
-                            <p>Viaje de desconexión</p>
-                        </div>
-                    </div>
-
-                    <div class="photo-item item-small">
-                        <img src="https://images.unsplash.com/photo-1513622470522-26c308a371e5?auto=format&fit=crop&w=600&q=80" alt="Ciudad">
-                        <div class="photo-overlay">
-                            <h4>Viena</h4>
-                            <p>Austria - Inspiración clásica</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="experience" class="section">
-            <div class="container">
-                <h2 class="section-title reveal">Trayectoria <span>Profesional</span></h2>
-                <div class="timeline reveal">
-                    <div class="timeline-item">
-                        <div class="timeline-date">2024 - 2026</div>
-                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Senior Frontend Developer | Agencia Digital</h3>
-                        <p style="color: var(--text-muted);">Creación de experiencias web completas y arquitecturas escalables, compaginando el trabajo remoto con mis viajes.</p>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-date">2021 - 2024</div>
-                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Desarrollador Web Freelance</h3>
-                        <p style="color: var(--text-muted);">Diseño y desarrollo de sitios para restaurantes, e-commerces y negocios locales.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer id="contact" class="footer">
-        <div class="container">
-            <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">¿Iniciamos un proyecto?</h3>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">Figueres, Cataluña | moradtest@example.com</p>
-            
-            <div style="display: flex; justify-content: center; gap: 1.5rem; font-size: 1.5rem; margin-bottom: 2rem;">
-                <a href="#" style="color: var(--text-main);"><i class="fab fa-github"></i></a>
-                <a href="#" style="color: var(--text-main);"><i class="fab fa-linkedin"></i></a>
-                <a href="#" style="color: var(--text-main);"><i class="fab fa-instagram"></i></a>
-            </div>
-            
-            <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 Morad. Diseño y Desarrollo Frontend.</p>
+    <header class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=2000&q=80" alt="Cinematic Background" class="w-full h-full object-cover opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black"></div>
         </div>
+        
+        <div class="relative z-10 max-w-4xl px-6 reveal">
+            <h1 class="text-5xl md:text-7xl font-semibold tracking-tight mb-6">Murad.</h1>
+            <p class="text-xl md:text-3xl font-light text-appleMuted mb-10 tracking-wide">My journey, my memories, my story.</p>
+            <a href="#about" class="inline-block pb-1 border-b border-appleMuted text-appleMuted hover:text-white hover:border-white transition-all duration-300">Descubre mi historia</a>
+        </div>
+    </header>
+
+    <section id="about" class="py-32 bg-black">
+        <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="reveal">
+                <h2 class="text-xs font-bold tracking-widest text-appleMuted uppercase mb-4">Orígenes y Evolución</h2>
+                <h3 class="text-3xl md:text-5xl font-medium leading-tight mb-8">De raíces marroquíes,<br>creciendo en Madrid.</h3>
+                <p class="text-appleMuted text-lg leading-relaxed mb-6">
+                    Soy una persona forjada por la mezcla de culturas, el esfuerzo y los valores familiares. Mi historia es la de alguien que valora el trabajo duro y la evolución constante.
+                </p>
+                <div class="space-y-4 text-appleMuted text-sm font-medium">
+                    <p><i class="fas fa-globe-africa w-6 text-white"></i> Residencia: Madrid, España | Origen: Marruecos</p>
+                    <p><i class="fas fa-language w-6 text-white"></i> Español · Árabe · Rifeño · Français · English</p>
+                    <p><i class="fas fa-heart w-6 text-white"></i> Valores: Esfuerzo, Familia, Crecimiento Personal</p>
+                </div>
+            </div>
+            <div class="reveal">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80" alt="Murad" class="rounded-2xl shadow-2xl opacity-90 hover:opacity-100 transition-opacity duration-500">
+            </div>
+        </div>
+    </section>
+
+    <section id="memories" class="py-32 bg-appleGray">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-24 reveal">
+                <h2 class="text-xs font-bold tracking-widest text-appleMuted uppercase mb-4">Capítulos</h2>
+                <h3 class="text-4xl md:text-5xl font-medium">Memorias que marcan el camino.</h3>
+            </div>
+
+            <div class="space-y-24">
+                <div class="flex flex-col md:flex-row gap-10 items-center reveal">
+                    <div class="w-full md:w-1/2">
+                        <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=800&q=80" alt="Raíces" class="rounded-xl w-full h-64 object-cover">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="text-sm text-appleMuted font-mono">CAPÍTULO I</span>
+                        <h4 class="text-2xl font-medium mt-2 mb-4">Raíces e Identidad</h4>
+                        <p class="text-appleMuted leading-relaxed">
+                            Marruecos no es solo un lugar de origen, es el cimiento de mis valores. El respeto por la familia y la profundidad de mis emociones nacen de aquí.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row-reverse gap-10 items-center reveal">
+                    <div class="w-full md:w-1/2">
+                        <img src="https://images.unsplash.com/photo-1539037116277-4db20202d0b4?auto=format&fit=crop&w=800&q=80" alt="Madrid" class="rounded-xl w-full h-64 object-cover">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="text-sm text-appleMuted font-mono">CAPÍTULO II</span>
+                        <h4 class="text-2xl font-medium mt-2 mb-4">La vida en España</h4>
+                        <p class="text-appleMuted leading-relaxed">
+                            Madrid me enseñó a adaptarme, a luchar por mis metas en un entorno nuevo y a construir una vida basada en la responsabilidad y el trabajo constante.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-32 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-xs font-bold tracking-widest text-appleMuted uppercase mb-4">Archivo Visual</h2>
+                <h3 class="text-4xl font-medium">Instantes capturados.</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80" alt="Viaje" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=600&q=80" alt="Paisaje" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=600&q=80" alt="Familia" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item aspect-square lg:col-span-2">
+                    <img src="https://images.unsplash.com/photo-1476820865390-c52aeebb9891?auto=format&fit=crop&w=1200&q=80" alt="Reflexión" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item aspect-square">
+                    <img src="https://images.unsplash.com/photo-1504198458649-3128b932f49e?auto=format&fit=crop&w=600&q=80" alt="Camino" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-32 bg-appleGray">
+        <div class="max-w-4xl mx-auto px-6 text-center reveal">
+            <h2 class="text-xs font-bold tracking-widest text-appleMuted uppercase mb-4">Trabajo y Disciplina</h2>
+            <h3 class="text-4xl font-medium mb-12">Logística: El motor del día a día.</h3>
+            
+            <div class="bg-black p-10 rounded-2xl text-left shadow-2xl border border-white/5">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center text-xl">
+                        <i class="fas fa-boxes-stacked"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-medium">Especialista en Logística</h4>
+                        <p class="text-appleMuted text-sm">Entorno Dinámico y Técnico</p>
+                    </div>
+                </div>
+                <p class="text-appleMuted mb-8 leading-relaxed">
+                    Trabajar en un almacén logístico no es solo mover mercancía; es precisión, responsabilidad y adaptación constante. Este entorno me ha enseñado a mantener la calma bajo presión y a entender que cada eslabón es vital para el resultado final.
+                </p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6 border-t border-white/10 pt-8">
+                    <div>
+                        <strong class="block text-white mb-1">Disciplina</strong>
+                        <span class="text-appleMuted text-sm">Constancia diaria</span>
+                    </div>
+                    <div>
+                        <strong class="block text-white mb-1">Adaptación</strong>
+                        <span class="text-appleMuted text-sm">Entornos técnicos</span>
+                    </div>
+                    <div>
+                        <strong class="block text-white mb-1">Responsabilidad</strong>
+                        <span class="text-appleMuted text-sm">Gestión eficiente</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 bg-black">
+        <div class="max-w-3xl mx-auto px-6 text-center reveal">
+            <h3 class="text-3xl font-medium mb-4">Dejemos un recuerdo más.</h3>
+            <p class="text-appleMuted mb-12">Si quieres conectar, compartir una historia o simplemente saludar.</p>
+            
+            <form class="space-y-8 text-left max-w-lg mx-auto">
+                <div>
+                    <input type="text" placeholder="Tu nombre" class="apple-input">
+                </div>
+                <div>
+                    <input type="email" placeholder="Tu email" class="apple-input">
+                </div>
+                <div>
+                    <textarea placeholder="Tu mensaje..." rows="3" class="apple-input resize-none"></textarea>
+                </div>
+                <div class="text-center pt-6">
+                    <button type="button" class="bg-white text-black px-8 py-3 rounded-full font-medium hover:bg-gray-200 transition-colors">
+                        Enviar mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-black py-10 border-t border-white/10 text-center">
+        <div class="flex justify-center gap-6 mb-6">
+            <a href="#" class="text-appleMuted hover:text-white transition-colors text-xl"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-appleMuted hover:text-white transition-colors text-xl"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="text-appleMuted hover:text-white transition-colors text-xl"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p class="text-appleMuted text-xs tracking-wider uppercase">© 2026 Murad. Diseñado para perdurar.</p>
     </footer>
 
     <script>
-        // Lógica del Menú Móvil
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.getElementById('nav-links');
-        const icon = mobileMenu.querySelector('i');
-
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            if(navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-
-        // Cerrar menú al hacer clic en un enlace (en móvil)
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            });
-        });
-
-        // Efecto sombra en el Navbar al hacer scroll
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if(window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Animación de aparición (Scroll Reveal)
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -681,8 +293,7 @@
             }
         }
         window.addEventListener("scroll", reveal);
-        // Disparar una vez al cargar
-        reveal();
+        reveal(); // Disparar al cargar
     </script>
 </body>
 </html>
