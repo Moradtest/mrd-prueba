@@ -3,17 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portafolio profesional de Moradtest - Desarrollador Frontend">
+    <meta name="description" content="Portafolio profesional de Moradtest - Desarrollador Frontend y Galería Visual">
     <meta name="author" content="Moradtest">
-    <title>Moradtest | Portafolio Profesional</title>
+    <title>Moradtest | Portafolio & Memorias</title>
     
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* Variables CSS para control fácil de la paleta */
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1D4ED8;
+            --secondary: #7C3AED;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --bg-body: #F8FAFC;
+            --bg-surface: #FFFFFF;
+            --border-color: #E2E8F0;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -22,22 +33,41 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #F8FAFC;
-            color: #1E293B;
+            background: var(--bg-body);
+            color: var(--text-main);
             line-height: 1.6;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        /* Navbar */
+        /* Utilidad de Animación Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+            transition-duration: 0.8s;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navbar Mejorado */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border-bottom: 1px solid transparent;
             z-index: 1000;
             padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .nav-container {
@@ -51,11 +81,12 @@
 
         .logo {
             font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #2563EB, #7C3AED);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            letter-spacing: -0.5px;
         }
 
         .nav-links {
@@ -66,16 +97,25 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #475569;
+            color: var(--text-muted);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: var(--transition);
+            font-size: 0.95rem;
         }
 
         .nav-links a:hover {
-            color: #2563EB;
+            color: var(--primary);
         }
 
-        /* Container */
+        /* Botón Menú Móvil */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        /* Container global */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -98,24 +138,23 @@
         }
 
         .hero-text h1 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             font-weight: 800;
-            line-height: 1.2;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #1E293B, #2563EB);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: var(--text-main);
+            letter-spacing: -1px;
         }
 
         .hero-text .highlight {
-            color: #2563EB;
+            color: var(--primary);
         }
 
         .hero-text p {
-            font-size: 1.2rem;
-            color: #64748B;
-            margin-bottom: 2rem;
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 90%;
         }
 
         .btn-group {
@@ -123,159 +162,119 @@
             gap: 1rem;
         }
 
-        .btn-primary {
-            background: #2563EB;
-            color: white;
+        .btn-primary, .btn-secondary {
             padding: 0.8rem 2rem;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s;
-            display: inline-block;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
         }
 
         .btn-primary:hover {
-            background: #1D4ED8;
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(37,99,235,0.2);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
         }
 
         .btn-secondary {
             background: transparent;
-            color: #2563EB;
-            padding: 0.8rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            border: 2px solid #2563EB;
-            transition: all 0.3s;
+            color: var(--text-main);
+            border: 2px solid var(--border-color);
         }
 
         .btn-secondary:hover {
-            background: #2563EB;
-            color: white;
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--bg-surface);
         }
 
         .hero-image {
-            background: linear-gradient(135deg, #2563EB, #7C3AED);
-            border-radius: 30px;
-            padding: 2rem;
-            text-align: center;
-            color: white;
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
-        .hero-image i {
-            font-size: 8rem;
-            margin-bottom: 1rem;
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 4/5;
         }
 
-        /* Section Styles */
+        /* Sections Comunes */
         .section {
-            padding: 5rem 0;
-            border-bottom: 1px solid #E2E8F0;
+            padding: 6rem 0;
         }
 
         .section-title {
-            font-size: 2rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 800;
             margin-bottom: 3rem;
             text-align: center;
+            letter-spacing: -0.5px;
         }
 
         .section-title span {
-            color: #2563EB;
+            color: var(--primary);
         }
 
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-            border: 1px solid #E2E8F0;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #2563EB;
-        }
-
-        .stat-label {
-            color: #64748B;
-            margin-top: 0.5rem;
-        }
-
-        /* Tech Stack */
-        .tech-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .tech-item {
-            background: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 500;
-            border: 1px solid #E2E8F0;
-            transition: all 0.3s;
-        }
-
-        .tech-item:hover {
-            background: #2563EB;
-            color: white;
-            border-color: #2563EB;
-            transform: translateY(-2px);
-        }
-
-        /* Projects Grid */
+        /* Projects Grid (Con Imágenes Reales) */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
         }
 
         .project-card {
-            background: white;
+            background: var(--bg-surface);
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            transition: all 0.3s;
-            border: 1px solid #E2E8F0;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
         }
 
         .project-image {
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
         }
 
         .project-info {
             padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-title {
@@ -285,38 +284,103 @@
         }
 
         .project-desc {
-            color: #64748B;
-            margin-bottom: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            flex-grow: 1;
         }
 
         .project-tech {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .project-tech span {
-            background: #F1F5F9;
+            background: var(--bg-body);
+            color: var(--text-muted);
             padding: 0.25rem 0.75rem;
             border-radius: 50px;
             font-size: 0.75rem;
-            font-weight: 500;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
         }
 
         .project-link {
-            color: #2563EB;
+            color: var(--primary);
             text-decoration: none;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 0.95rem;
         }
 
-        /* Timeline for memories */
+        /* Galería de Memorias (NUEVO) */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: 250px;
+            gap: 1.5rem;
+        }
+
+        .photo-item {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 2rem 1.5rem 1.5rem;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo-item:hover .photo-overlay {
+            opacity: 1;
+        }
+
+        .photo-overlay h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .photo-overlay p {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Tamaños de cuadrícula de fotos */
+        .item-large { grid-column: span 8; }
+        .item-small { grid-column: span 4; }
+        .item-tall { grid-column: span 4; grid-row: span 2; }
+
+        /* Timeline (Rediseñado) */
         .timeline {
             position: relative;
             padding-left: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .timeline::before {
@@ -326,381 +390,299 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: #2563EB;
+            background: var(--border-color);
         }
 
         .timeline-item {
             position: relative;
-            padding-bottom: 2rem;
+            padding-bottom: 3rem;
             padding-left: 2rem;
         }
 
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -0.5rem;
-            top: 0;
-            width: 1rem;
-            height: 1rem;
+            left: -5px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            background: #2563EB;
-            border: 2px solid white;
+            background: var(--primary);
+            box-shadow: 0 0 0 4px var(--bg-body);
         }
 
         .timeline-date {
             font-weight: 700;
-            color: #2563EB;
+            color: var(--primary);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             margin-bottom: 0.5rem;
-        }
-
-        .timeline-title {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Contact Section */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        .contact-info {
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid #E2E8F0;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid #E2E8F0;
-        }
-
-        .contact-item i {
-            width: 40px;
-            height: 40px;
-            background: #EFF6FF;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #2563EB;
-            font-size: 1.2rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .social-link {
-            width: 45px;
-            height: 45px;
-            background: #F1F5F9;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #475569;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .social-link:hover {
-            background: #2563EB;
-            color: white;
-            transform: translateY(-3px);
         }
 
         /* Footer */
         .footer {
-            background: #1E293B;
-            color: white;
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-color);
             padding: 3rem 0;
             text-align: center;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .hero-content {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-            
+            .hero-text p {
+                max-width: 100%;
+                margin: 0 auto 2.5rem;
+            }
             .btn-group {
                 justify-content: center;
             }
-            
-            .contact-grid {
+            .photo-grid {
                 grid-template-columns: 1fr;
             }
-            
+            .item-large, .item-small, .item-tall {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
             .nav-links {
-                display: none;
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--bg-surface);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: 0.4s ease;
+                border-top: 1px solid var(--border-color);
             }
-            
+            .nav-links.active {
+                left: 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
             .hero-text h1 {
-                font-size: 2rem;
+                font-size: 2.8rem;
             }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .section {
+                padding: 4rem 0;
             }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
+
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="logo">Moradtest</div>
-            <ul class="nav-links">
+            <a href="#" class="logo" style="text-decoration: none;">Morad.</a>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="#home">Inicio</a></li>
-                <li><a href="#about">Sobre Mí</a></li>
-                <li><a href="#projects">Proyectos</a></li>
+                <li><a href="#projects">Trabajo</a></li>
+                <li><a href="#experience">Experiencia</a></li>
                 <li><a href="#memories">Memorias</a></li>
-                <li><a href="#contact">Contacto</a></li>
             </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
     </nav>
 
     <main>
-        <!-- Hero Section -->
         <section id="home" class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <div class="hero-text">
-                        <h1>Desarrollador <span class="highlight">Frontend</span><br>Creativo & Profesional</h1>
-                        <p>Especializado en crear experiencias web excepcionales con código limpio y diseño moderno. 10+ años transformando ideas en realidad digital.</p>
+                    <div class="hero-text reveal">
+                        <h1>Arquitecto Digital & <span class="highlight">Viajero</span></h1>
+                        <p>Desarrollador Frontend especializado en crear interfaces premium. Combino mi pasión por el código limpio con las perspectivas visuales que adquiero explorando el mundo.</p>
                         <div class="btn-group">
-                            <a href="#projects" class="btn-primary">Ver Proyectos</a>
+                            <a href="#projects" class="btn-primary">Ver Trabajo <i class="fas fa-arrow-right"></i></a>
                             <a href="#contact" class="btn-secondary">Contactar</a>
                         </div>
                     </div>
-                    <div class="hero-image">
-                        <i class="fas fa-code"></i>
-                        <h3>Moradtest</h3>
-                        <p>Frontend Developer</p>
+                    <div class="hero-image reveal">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Morad Profil">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Stats Section -->
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title">Métricas <span>Profesionales</span></h2>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">10+</div>
-                        <div class="stat-label">Años de Experiencia</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">Proyectos Completados</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">30+</div>
-                        <div class="stat-label">Clientes Satisfechos</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">Dedicación</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Tech Stack -->
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title">Tecnologías <span>Dominadas</span></h2>
-                <div class="tech-grid">
-                    <span class="tech-item">HTML5</span>
-                    <span class="tech-item">CSS3</span>
-                    <span class="tech-item">JavaScript</span>
-                    <span class="tech-item">TypeScript</span>
-                    <span class="tech-item">React</span>
-                    <span class="tech-item">Vue.js</span>
-                    <span class="tech-item">Angular</span>
-                    <span class="tech-item">Node.js</span>
-                    <span class="tech-item">Python</span>
-                    <span class="tech-item">Git</span>
-                    <span class="tech-item">Figma</span>
-                    <span class="tech-item">Tailwind</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
         <section id="projects" class="section">
             <div class="container">
-                <h2 class="section-title">Proyectos <span>Destacados</span></h2>
-                <div class="projects-grid">
+                <h2 class="section-title reveal">Proyectos <span>Destacados</span></h2>
+                <div class="projects-grid reveal">
                     <div class="project-card">
                         <div class="project-image">
-                            <i class="fas fa-shopping-cart"></i>
+                            <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="E-commerce">
                         </div>
                         <div class="project-info">
-                            <h3 class="project-title">E-commerce Platform</h3>
-                            <p class="project-desc">Plataforma de comercio electrónico completa con panel de administración y pasarela de pagos.</p>
+                            <h3 class="project-title">E-commerce Premium</h3>
+                            <p class="project-desc">Plataforma de comercio electrónico de alto rendimiento con diseño minimalista y pasarela de pagos integrada.</p>
                             <div class="project-tech">
                                 <span>React</span>
+                                <span>Tailwind CSS</span>
                                 <span>Node.js</span>
-                                <span>MongoDB</span>
                             </div>
-                            <a href="#" class="project-link">Ver más <i class="fas fa-arrow-right"></i></a>
+                            <a href="#" class="project-link">Ver caso de estudio <i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
                     
                     <div class="project-card">
                         <div class="project-image">
-                            <i class="fas fa-chart-line"></i>
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dashboard">
                         </div>
                         <div class="project-info">
-                            <h3 class="project-title">Dashboard Analytics</h3>
-                            <p class="project-desc">Dashboard interactivo para visualización de datos en tiempo real con gráficos avanzados.</p>
+                            <h3 class="project-title">Analytics Dashboard</h3>
+                            <p class="project-desc">Panel de administración interactivo para visualización de datos en tiempo real de empresas financieras.</p>
                             <div class="project-tech">
                                 <span>Vue.js</span>
                                 <span>D3.js</span>
                                 <span>Firebase</span>
                             </div>
-                            <a href="#" class="project-link">Ver más <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card">
-                        <div class="project-image">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">App Móvil Fitness</h3>
-                            <p class="project-desc">Aplicación móvil multiplataforma para seguimiento de entrenamientos y nutrición.</p>
-                            <div class="project-tech">
-                                <span>React Native</span>
-                                <span>Redux</span>
-                                <span>API REST</span>
-                            </div>
-                            <a href="#" class="project-link">Ver más <i class="fas fa-arrow-right"></i></a>
+                            <a href="#" class="project-link">Ver caso de estudio <i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Memories / Timeline Section -->
-        <section id="memories" class="section">
+        <section id="memories" class="section" style="background: var(--bg-surface);">
             <div class="container">
-                <h2 class="section-title">Línea de <span>Tiempo</span></h2>
-                <div class="timeline">
+                <h2 class="section-title reveal">Memorias <span>Visuales</span></h2>
+                <p class="reveal" style="text-align: center; color: var(--text-muted); margin-top: -2rem; margin-bottom: 3rem;">Lugares, arquitectura y momentos que inspiran mi diseño.</p>
+                
+                <div class="photo-grid reveal">
+                    <div class="photo-item item-large">
+                        <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1000&q=80" alt="Milán">
+                        <div class="photo-overlay">
+                            <h4>Duomo di Milano</h4>
+                            <p>Italia - Estudio arquitectónico visual</p>
+                        </div>
+                    </div>
+                    
+                    <div class="photo-item item-tall">
+                        <img src="https://images.unsplash.com/photo-1516483638261-f40af5a5a456?auto=format&fit=crop&w=600&q=80" alt="Europa">
+                        <div class="photo-overlay">
+                            <h4>Cinque Terre</h4>
+                            <p>Italia - Paletas de color naturales</p>
+                        </div>
+                    </div>
+                    
+                    <div class="photo-item item-small">
+                        <img src="https://images.unsplash.com/photo-1467226632440-65f0b4957bd6?auto=format&fit=crop&w=600&q=80" alt="Montañas">
+                        <div class="photo-overlay">
+                            <h4>Los Balcanes</h4>
+                            <p>Viaje de desconexión</p>
+                        </div>
+                    </div>
+
+                    <div class="photo-item item-small">
+                        <img src="https://images.unsplash.com/photo-1513622470522-26c308a371e5?auto=format&fit=crop&w=600&q=80" alt="Ciudad">
+                        <div class="photo-overlay">
+                            <h4>Viena</h4>
+                            <p>Austria - Inspiración clásica</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <div class="container">
+                <h2 class="section-title reveal">Trayectoria <span>Profesional</span></h2>
+                <div class="timeline reveal">
                     <div class="timeline-item">
-                        <div class="timeline-date">2024 - Presente</div>
-                        <div class="timeline-title">Lead Frontend Developer | Tech Corp</div>
-                        <p>Liderando equipo de 5 desarrolladores, implementando arquitectura moderna y mejores prácticas.</p>
+                        <div class="timeline-date">2024 - 2026</div>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Senior Frontend Developer | Agencia Digital</h3>
+                        <p style="color: var(--text-muted);">Creación de experiencias web completas y arquitecturas escalables, compaginando el trabajo remoto con mis viajes.</p>
                     </div>
                     
                     <div class="timeline-item">
                         <div class="timeline-date">2021 - 2024</div>
-                        <div class="timeline-title">Senior Frontend Developer | Digital Agency</div>
-                        <p>Desarrollo de aplicaciones web complejas para clientes internacionales.</p>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-date">2018 - 2021</div>
-                        <div class="timeline-title">Frontend Developer | Startup Innovate</div>
-                        <p>Creación desde cero de productos digitales escalables.</p>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-date">2014 - 2018</div>
-                        <div class="timeline-title">Grado en Ingeniería Informática</div>
-                        <p>Universidad Tecnológica - Especialización en Desarrollo Web.</p>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Desarrollador Web Freelance</h3>
+                        <p style="color: var(--text-muted);">Diseño y desarrollo de sitios para restaurantes, e-commerces y negocios locales.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="section">
-            <div class="container">
-                <h2 class="section-title">Información de <span>Contacto</span></h2>
-                <div class="contact-grid">
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <strong>Email</strong><br>
-                                moradtest@example.com
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <strong>Teléfono</strong><br>
-                                +34 123 456 789
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <strong>Ubicación</strong><br>
-                                Madrid, España
-                            </div>
-                        </div>
-                        <div class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    
-                    <div style="background: white; padding: 2rem; border-radius: 16px; border: 1px solid #E2E8F0;">
-                        <h3 style="margin-bottom: 1rem;">¿Hablamos?</h3>
-                        <p style="color: #64748B; margin-bottom: 1.5rem;">Estoy disponible para colaboraciones, proyectos freelance o simplemente para conectar.</p>
-                        <div style="background: #F1F5F9; padding: 1.5rem; border-radius: 12px;">
-                            <i class="fas fa-clock" style="color: #2563EB; margin-right: 0.5rem;"></i>
-                            <strong>Horario de respuesta:</strong>
-                            <p style="margin-top: 0.5rem;">Lunes a Viernes: 9:00 - 18:00<br>Tiempo de respuesta: 24h</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
-    <footer class="footer">
+    <footer id="contact" class="footer">
         <div class="container">
-            <p>&copy; 2024 Moradtest. Todos los derechos reservados.</p>
-            <p style="margin-top: 1rem; opacity: 0.8;">Construyendo experiencias digitales excepcionales</p>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">¿Iniciamos un proyecto?</h3>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Figueres, Cataluña | moradtest@example.com</p>
+            
+            <div style="display: flex; justify-content: center; gap: 1.5rem; font-size: 1.5rem; margin-bottom: 2rem;">
+                <a href="#" style="color: var(--text-main);"><i class="fab fa-github"></i></a>
+                <a href="#" style="color: var(--text-main);"><i class="fab fa-linkedin"></i></a>
+                <a href="#" style="color: var(--text-main);"><i class="fab fa-instagram"></i></a>
+            </div>
+            
+            <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 Morad. Diseño y Desarrollo Frontend.</p>
         </div>
     </footer>
 
     <script>
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if(target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
+        // Lógica del Menú Móvil
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        const icon = mobileMenu.querySelector('i');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            if(navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Cerrar menú al hacer clic en un enlace (en móvil)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
             });
         });
 
-        // Navbar scroll effect
+        // Efecto sombra en el Navbar al hacer scroll
         window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
+            const navbar = document.getElementById('navbar');
             if(window.scrollY > 50) {
-                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+                navbar.classList.add('scrolled');
             } else {
-                navbar.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+                navbar.classList.remove('scrolled');
             }
         });
+
+        // Animación de aparición (Scroll Reveal)
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Disparar una vez al cargar
+        reveal();
     </script>
 </body>
 </html>
